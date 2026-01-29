@@ -148,8 +148,7 @@ function showSuccess(original, converted) {
   statusEl.classList.add("hidden");
   successEl.classList.remove("hidden");
   errorEl.classList.add("hidden");
-  originalEl.textContent = original;
-  convertedEl.textContent = converted;
+  renderDiff(original, converted);
 }
 
 function showError(message, details) {
@@ -173,4 +172,44 @@ function showToast(message, isError) {
   showToast.timeoutId = setTimeout(() => {
     toastEl.classList.add("hidden");
   }, 2000);
+}
+
+function renderDiff(original, converted) {
+  originalEl.textContent = "";
+  convertedEl.textContent = "";
+
+  if (!window.Diff || typeof window.Diff.diffChars !== "function") {
+    originalEl.textContent = original;
+    convertedEl.textContent = converted;
+    return;
+  }
+
+  const diff = window.Diff.diffChars(original, converted);
+  originalEl.appendChild(buildDiffFragment(diff, "original"));
+  convertedEl.appendChild(buildDiffFragment(diff, "converted"));
+}
+
+function buildDiffFragment(diff, side) {
+  const fragment = document.createDocumentFragment();
+
+  diff.forEach((part) => {
+    if (side === "original" && part.added) {
+      return;
+    }
+    if (side === "converted" && part.removed) {
+      return;
+    }
+
+    const span = document.createElement("span");
+    if (part.added) {
+      span.classList.add("diff-added");
+    }
+    if (part.removed) {
+      span.classList.add("diff-removed");
+    }
+    span.textContent = part.value;
+    fragment.appendChild(span);
+  });
+
+  return fragment;
 }

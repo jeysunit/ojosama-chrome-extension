@@ -23,13 +23,15 @@
             <button id="copy" class="primary">コピー</button>
           </div>
         </div>
-        <div class="field">
-          <label>元テキスト</label>
-          <pre id="original"></pre>
-        </div>
-        <div class="field">
-          <label>変換後テキスト</label>
-          <pre id="converted"></pre>
+        <div class="diff-grid">
+          <div class="diff-column">
+            <label>変換前テキスト</label>
+            <pre id="original" class="diff-text"></pre>
+          </div>
+          <div class="diff-column">
+            <label>変換後テキスト</label>
+            <pre id="converted" class="diff-text"></pre>
+          </div>
         </div>
       </section>
 
@@ -44,6 +46,7 @@
       <div id="toast" class="toast hidden"></div>
     </main>
 
+    <script src="diff.min.js"></script>
     <script src="result.js"></script>
   </body>
 </html>
