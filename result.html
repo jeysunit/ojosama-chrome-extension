@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>お嬢様変換結果</title>
+    <link rel="stylesheet" href="result.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h1>お嬢様変換</h1>
+        <p class="subtitle">選択した文章をお嬢様言葉に変換します。</p>
+      </header>
+
+      <section id="status" class="status">読み込み中…</section>
+
+      <section id="success" class="panel hidden">
+        <div class="panel-header">
+          <h2>変換結果</h2>
+          <div class="actions">
+            <button id="retry" class="secondary">もう一度変換</button>
+            <button id="copy" class="primary">コピー</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>元テキスト</label>
+          <pre id="original"></pre>
+        </div>
+        <div class="field">
+          <label>変換後テキスト</label>
+          <pre id="converted"></pre>
+        </div>
+      </section>
+
+      <section id="error" class="panel hidden">
+        <div class="panel-header">
+          <h2>エラー</h2>
+          <button id="retry-error" class="secondary">再試行</button>
+        </div>
+        <p id="error-message"></p>
+      </section>
+
+      <div id="toast" class="toast hidden"></div>
+    </main>
+
+    <script src="result.js"></script>
+  </body>
+</html>
